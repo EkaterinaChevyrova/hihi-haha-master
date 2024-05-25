@@ -168,7 +168,5 @@ public class TelegramBotService {
         visitor.setVisitorId(chatId);
         visitor.setDate(new Date());
         visitor.setJoke(joke);
-
-        saveUserAction(visitor.getVisitorId(), action, joke);
     }
 }
