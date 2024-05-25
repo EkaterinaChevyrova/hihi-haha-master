@@ -12,6 +12,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 import ru.edel.java.hahatushkabot.model.JokesModel;
 import ru.edel.java.hahatushkabot.model.ReportVisitor;
+import ru.edel.java.hahatushkabot.repository.ReportVisitorRepository;
 
 import java.util.Date;
 import java.util.LinkedHashMap;
@@ -22,10 +23,13 @@ import java.util.stream.Collectors;
 public class TelegramBotService {
     private final TelegramBot telegramBot;
     private final JokesService jokesService;
+    private final ReportVisitorRepository reportVisitorRepository;
 
-    public TelegramBotService(@Autowired TelegramBot telegramBot, JokesService jokesService) {
+    @Autowired
+    public TelegramBotService(TelegramBot telegramBot, JokesService jokesService, ReportVisitorRepository reportVisitorRepository) {
         this.telegramBot = telegramBot;
         this.jokesService = jokesService;
+        this.reportVisitorRepository = reportVisitorRepository;
         this.telegramBot.setUpdatesListener(updates -> {
             updates.forEach(this::handleUpdate);
             return UpdatesListener.CONFIRMED_UPDATES_ALL;
@@ -168,5 +172,6 @@ public class TelegramBotService {
         visitor.setVisitorId(chatId);
         visitor.setDate(new Date());
         visitor.setJoke(joke);
+        reportVisitorRepository.save(visitor);
     }
 }
