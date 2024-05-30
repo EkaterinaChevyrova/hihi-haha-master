@@ -1,10 +1,11 @@
 databaseChangeLog:
   - changeSet:
       id: 1
-      author: itche
+      author: it
+
       changes:
         - createTable:
-            tableName: users
+            tableName: user
             columns:
               - column:
                   name: id
@@ -39,7 +40,7 @@ databaseChangeLog:
                   constraints:
                     nullable: false
         - createTable:
-            tableName: user_roles
+            tableName: user_role
             columns:
               - column:
                   name: id
@@ -60,13 +61,13 @@ databaseChangeLog:
                     nullable: false
         - addForeignKeyConstraint:
             baseColumnNames: user_id
-            baseTableName: user_roles
-            constraintName: fk_user_roles_user
+            baseTableName: user_role
+            constraintName: fk_user_role_user
             referencedColumnNames: id
-            referencedTableName: users
+            referencedTableName: user
 
         - createTable:
-            tableName: jokes
+            tableName: joke
             columns:
               - column:
                   name: id
@@ -91,7 +92,7 @@ databaseChangeLog:
                   constraints:
                     nullable: false
         - createTable:
-            tableName: visitors
+            tableName: visitor
             columns:
               - column:
                   name: id
@@ -118,7 +119,7 @@ databaseChangeLog:
                   type: BIGINT
         - addForeignKeyConstraint:
             baseColumnNames: joke_id
-            baseTableName: visitors
-            constraintName: fk_visitors_joke
+            baseTableName: visitor
+            constraintName: fk_visitor_joke
             referencedColumnNames: id
-            referencedTableName: jokes
+            referencedTableName: joke

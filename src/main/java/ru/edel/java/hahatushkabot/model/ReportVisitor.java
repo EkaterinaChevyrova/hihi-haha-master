@@ -28,7 +28,7 @@ public class ReportVisitor {
     private Date date;
 
     @ManyToOne
-    @Column(name = "joke")
+    @JoinColumn(name = "joke_id", referencedColumnName = "id")
     private JokesModel joke;
 
     public void setJoke(JokesModel joke) {
